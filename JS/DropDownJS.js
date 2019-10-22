@@ -29,7 +29,7 @@ request.onload = function() {
    } else {
     // Reached the server, but it returned an error
   }   
-}
+} 
 
 
 request.onerror = function() {
