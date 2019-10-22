@@ -1,0 +1,116 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="CSS/HomePageCSS.css">
+<script src="JS/DropDownJS.js"></script>
+<script>
+function msg() {
+  
+  window.open("index.html");
+}
+</script>
+<img src="https://www.nasa.gov/sites/default/files/thumbnails/image/nasa-logo-web-rgb.png" width="500" height="250" align = "left"/>
+<img src="https://www.nasa.gov/sites/default/files/thumbnails/image/s75-31690.jpeg" width="500" height="250" align = "center"/>
+<img src="https://cdn.evbuc.com/eventlogos/204026273/square.png" width="250" height="250" align = "right"/>
+<body>
+
+<div class="container">
+  <form action="action_page.php">
+
+
+
+	<div class="row">
+      <div class="col-25">
+        <label for="country">What is your current role?</label>
+      </div>
+      <div class="col-75">
+        <select id="country" name="country">
+<option value="australia">Please choose an affiliation</option>
+	<option value="australia">School teacher</option>
+          <option value="australia">College Professor</option>
+          <option value="canada">Other educator</option>
+          <option value="usa">Researcher</option>
+	  <option value="usa">Student</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="country">Country</label>
+      </div>
+      <div class="col-75">
+        <select id="country" name="country">
+	<option value="australia">Please choose your home country</option>
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="subject">What are you looking for?</label>
+      </div>
+      <div class="col-75">
+        <textarea id="subject" name="What are you looking for?" placeholder="Write something.." style="height:200px"></textarea>
+      </div>
+    </div>
+
+
+
+
+       <div class="row">
+      <div class="col-25">
+        <label for="country">Type of star</label>
+      </div>
+      <div class="col-75">
+        <select id="country" name="country">
+	<option value="australia">Please choose a type</option>
+	<option value="australia">Blue Giant</option>
+          <option value="australia">White Dwarf</option>
+          <option value="canada">Red Giant</option>
+          <option value="usa">Orange Star</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="locality-dropdown">Name of Star</label>
+      </div>
+      <div class="col-75">
+        <select id="locality-dropdown" name="locality" onload="function()">
+        </select>
+      </div>
+    </div>
+    
+
+
+
+    <div class="row">
+      <script src="JS/DropDownJS.js"></script>
+      <div class="col-25">
+        <label for="numberOfPlanets-dropdown">Number of Planets</label>
+      </div>
+      <div class="col-75">
+        <select id="numberOfPlanets-dropdown" name="locality" onchange="this.function()">
+	<option value="australia">Please choose number of Planets</option>
+ 	<option value="australia">1</option>
+          <option value="canada">2</option>
+          <option value="usa">3</option>
+	<option value="australia">4</option>
+ 	<option value="australia">5</option>
+          <option value="canada">6</option>
+          <option value="usa">7</option>
+          <option value="usa">8</option>      
+</select>
+      </div>
+    </div>
+    <input type = "Submit" onclick="msg()"></input>
+    </div>
+  </form>
+</div>
+</body>
+</head>
+</html>

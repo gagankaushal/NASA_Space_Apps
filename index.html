@@ -1,0 +1,196 @@
+<html>
+    <head>
+        <title>A-Frame Starter Kit - Mini Animated Planetarium</title>
+        <meta name="description" content="Build your own planetarium with A-frame">
+        <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+        <script src="https://unpkg.com/aframe-star-system-component@1.0.0/index.js"></script>
+
+        <!-- let's add the animation and orbit controls components -->
+        <script src="https://unpkg.com/aframe-animation-component@^5.1.2/dist/aframe-animation-component.min.js"></script>
+        <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+        <script src="shader-star.js"></script>
+    
+        <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+        <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+        <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+        <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
+        <script src="set-image.js"></script>
+
+        <script src="https://unpkg.com/aframe-teleport-controls@0.2.x/dist/aframe-teleport-controls.min.js"></script>
+
+    </head>
+
+    <body>
+      
+        <a-scene>
+
+            <a-assets>
+              <img id="red-thumb" crossorigin="anonymous" src="https://cdn.glitch.com/ca3f2b8c-9ded-4ac4-8a70-5c8a73fcbddd%2FScreen%20Shot%202019-10-19%20at%206.56.18%20PM.png?v=1571525808050">
+              <img id="white-thumb" crossorigin="anonymous" src="https://cdn.glitch.com/ca3f2b8c-9ded-4ac4-8a70-5c8a73fcbddd%2FScreen%20Shot%202019-10-19%20at%207.01.54%20PM.png?v=1571526130894">
+              <img id="blue-thumb" crossorigin="anonymous" src="https://cdn.glitch.com/ca3f2b8c-9ded-4ac4-8a70-5c8a73fcbddd%2FScreen%20Shot%202019-10-19%20at%207.23.55%20PM.png?v=1571527455607">
+              <img id="orange-thumb" crossorigin="anonymous" src="https://cdn.glitch.com/ca3f2b8c-9ded-4ac4-8a70-5c8a73fcbddd%2FScreen%20Shot%202019-10-19%20at%207.29.27%20PM.png?v=1571527798556">
+              <img id="increase-thumb" crossorigin="anonymous" src="https://cdn.glitch.com/ca3f2b8c-9ded-4ac4-8a70-5c8a73fcbddd%2FScreen%20Shot%202019-10-19%20at%208.40.50%20PM.png?v=1571532083104">
+              <img id="decrease-thumb" crossorigin="anonymous" src="https://cdn.glitch.com/ca3f2b8c-9ded-4ac4-8a70-5c8a73fcbddd%2FScreen%20Shot%202019-10-19%20at%208.40.15%20PM.png?v=1571532078118">
+
+              <!-- Image link template to be reused. -->
+              <script id="link-white" type="text/html">
+                <a-entity class="link"
+                  geometry="primitive: plane; height: 5; width: 5"
+                  material="shader: flat; src: ${thumb}"
+                  event-set__1="_event: mousedown; scale: 1 1 1"
+                  event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+                  event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+                  event-set__4="_event: mouseleave; scale: 1 1 1"
+                  set-white="on: click; target: #sun; src: ${src}"</a-entity>
+              </script>
+              <script id="link-red" type="text/html">
+                <a-entity class="link"
+                  geometry="primitive: plane; height: 5; width: 5"
+                  material="shader: flat; src: ${thumb}"
+                  event-set__1="_event: mousedown; scale: 1 1 1"
+                  event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+                  event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+                  event-set__4="_event: mouseleave; scale: 1 1 1"
+                  set-red="on: click; target: #sun; src: ${src}"</a-entity>
+              </script>
+              <script id="link-orange" type="text/html">
+                <a-entity class="link"
+                  geometry="primitive: plane; height: 5; width: 5"
+                  material="shader: flat; src: ${thumb}"
+                  event-set__1="_event: mousedown; scale: 1 1 1"
+                  event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+                  event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+                  event-set__4="_event: mouseleave; scale: 1 1 1"
+                  set-orange="on: click; target: #sun; src: ${src}"</a-entity>
+              </script>
+              <script id="link-blue" type="text/html">
+                <a-entity class="link"
+                  geometry="primitive: plane; height: 5; width: 5"
+                  material="shader: flat; src: ${thumb}"
+                  event-set__1="_event: mousedown; scale: 1 1 1"
+                  event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+                  event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+                  event-set__4="_event: mouseleave; scale: 1 1 1"
+                  set-blue="on: click; target: #sun; src: ${src}"</a-entity>
+              </script>
+              <script id="link-increase" type="text/html">
+                <a-entity class="link"
+                  geometry="primitive: plane; height: 6; width: 6"
+                  material="shader: flat; src: ${thumb}"
+                  event-set__1="_event: mousedown; scale: 1 1 1"
+                  event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+                  event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+                  event-set__4="_event: mouseleave; scale: 1 1 1"
+                  set-increase="on: click; target: #sun; src: ${src}"</a-entity>
+              </script>
+              <script id="link-decrease" type="text/html">
+                <a-entity class="link"
+                  geometry="primitive: plane; height: 6; width: 6"
+                  material="shader: flat; src: ${thumb}"
+                  event-set__1="_event: mousedown; scale: 1 1 1"
+                  event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+                  event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+                  event-set__4="_event: mouseleave; scale: 1 1 1"
+                  set-decrease="on: click; target: #sun; src: ${src}"</a-entity>
+              </script>
+
+          </a-assets>
+          
+            <!-- This is a "mixin" we can apply to planets to make them
+            rotate-->
+            <a-mixin id="sun-rotation" animation="property: rotation; loop: true; from:  0 0 0; to: 0 360 0; dur: 60000; easing: linear;"></a-mixin>
+            <a-mixin id="moon-rotation" animation="property: rotation; loop: true; from:  0 0 0; to: 0 360 0; dur: 2800; easing: linear;"></a-mixin>
+
+            <!-- here is a "mixin" that we can apply to a container to make the
+            planet inside it orbit -->
+            <a-mixin id="orbit" animation="property: rotation; loop: true; to: 0 360 0; dur: 40000; easing: linear;"></a-mixin>
+            <a-mixin id="text-orbit" animation="property: rotation; loop: true; to: 0 -360 0; dur: 30000; easing: linear;"></a-mixin>
+            <a-mixin id="moon-orbit" animation="property: rotation; loop: true; to: 0 360 0; dur: 2800; easing: linear;"></a-mixin>
+
+          
+            <a-assets>
+                <img id="earth-texture" src="https://cdn.glitch.com/d558c128-2ed0-4284-a0da-4d18b9163ad6%2Fearthmap1k.jpg?1541102064615"
+                    crossorigin="anonymous">
+                <img id="moon-texture" src="https://static.designboom.com/wp-content/uploads/2019/10/nasa-3d-map-of-the-moon-kit-cg-artists-creators-designboom-1.jpg"
+                    crossorigin="anonymous">
+                <img id="venus-texture" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/90ad8232-4e09-4675-b9e7-bc2898960870/dc0ss1u-9ce1cbd0-6f56-4bb1-ab24-e64089914504.png/v1/fill/w_1024,h_512,q_80,strp/venus_cloud_texture_map_by_jcpag2010_dc0ss1u-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTEyIiwicGF0aCI6IlwvZlwvOTBhZDgyMzItNGUwOS00Njc1LWI5ZTctYmMyODk4OTYwODcwXC9kYzBzczF1LTljZTFjYmQwLTZmNTYtNGJiMS1hYjI0LWU2NDA4OTkxNDUwNC5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.W_cmzd6frwnuf_p4_K40ME9cIai41bgUtrIImysmwaM"
+                    crossorigin="anonymous">
+                <img id="mars-texture" src="https://vignette.wikia.nocookie.net/planet-texture-maps/images/1/19/Mars_Map.png/revision/latest/scale-to-width-down/451?cb=20190402042909"
+                    crossorigin="anonymous">
+          </a-assets>
+
+            <a-entity id="basic-light" light="type: ambient; color: #222"></a-entity>
+
+            <a-sky id="skybox" color="black"></a-sky>
+            <a-entity star-system="count: 1000; radius: 250; depth: 0"></a-entity>
+
+            <a-light id="sun-light" type="point" color="orange" position="0 0 0"></a-light>
+            <a-sphere id="sun" position="0 0 0" radius="4" mixin="sun-rotation" light="type: point"
+                material="shader:star; starCol: 3;"></a-sphere>
+            <a-entity id="star-text" position="0 8 0"
+                text="anchor: center; width: 16; color: white; value: Aldebaran: Aldebaran A is an orange-red giant star and the brightest star is the consolation Taurus. It has a solar mass of roughly 1.25x our sun and a surface temperature of 3900K. Aldebaran has evolved from the main sequence stage of its life cycle and exhausted the supply of hydrogen fuel in its core.">
+            </a-entity> 
+
+            <a-entity  id="solar-system" mixin="orbit" animation="dur: 30000;">
+                <a-mixin id="earth-rotation" animation="property: rotation; loop: true; from:  0 0 0; to: 0 360 0; dur: 20000; easing: linear;"></a-mixin>
+              
+                <a-entity id="earth-and-moon" position="0 0 14">
+                    <a-entity id="planet-text" position="-2.5 1 2"
+                          text="anchor: left; width: 11; color: white; value:Just Right: The habitable zone also known as the &quot;Goldilocks zone&quot; is the perfect area in which a planet is at the right orbit to support liquid water. Here the planet is not too warm to vaporize water and not too cold to freeze it. It is important that to support life a planet must have its entire orbit in this habitable zone." mixin="text-orbit">
+                    </a-entity> 
+                    <a-entity id="earth-container">
+                        <a-sphere position="0 0 0" radius=".5" id="earth" src="#earth-texture" mixin="earth-rotation"></a-sphere>
+                        <a-entity id="moon-container" mixin="moon-orbit">
+                            <a-sphere position="-1 0 0" radius=".10" id="moon" src="#moon-texture" mixin="moon-rotation"></a-sphere>
+                        </a-entity>
+                    </a-entity>
+                </a-entity>
+              
+                <!-- large rings we can use to guide our orbits -->
+                <a-entity id="orbit-ring" geometry="primitive: torus; radius: 6.99; radiusTubular: 0.01;segmentsTubular: 50" material="shader: flat; color: #FFFFFF;opacity: 0.3"
+                  rotation="90 0 0" scale="2 2 0.1"></a-entity>
+              
+                <a-entity id="habitable-zone-inner" geometry="primitive: cylinder; height: .05; radius: 12.5; openEnded: true" material="shader: flat; side: double; color:green"></a-entity>
+                <a-entity id="habitable-zone-outer" geometry="primitive: cylinder; height: .05; radius: 15.5; openEnded: true" material="shader: flat; side: double; color:green"></a-entity>
+
+            </a-entity>            
+          
+          
+            <!-- Image links. -->
+            <a-entity id="link1" layout="type: line; margin: 1.5" position="-4 -11 0">
+              <a-entity template="src: #link-white" data-src="#solar-system" data-thumb="#white-thumb"></a-entity>
+            </a-entity>
+            <a-entity id="link2" layout="type: line; margin: 1.5" position="12 -11 0">
+              <a-entity template="src: #link-red" data-src="#solar-system" data-thumb="#red-thumb"></a-entity>
+            </a-entity>
+            <a-entity id="link3" layout="type: line; margin: 1.5" position="4 -11 0">
+              <a-entity template="src: #link-orange" data-src="#solar-system" data-thumb="#orange-thumb"></a-entity>
+            </a-entity>
+            <a-entity id="link4" layout="type: line; margin: 1.5" position="-12 -11 0">
+              <a-entity template="src: #link-blue" data-src="#solar-system" data-thumb="#blue-thumb"></a-entity>
+            </a-entity>
+            <a-entity id="link5" layout="type: line; margin: 1.5" position="4 -18 0">
+              <a-entity template="src: #link-increase" data-src="#solar-system" data-thumb="#increase-thumb"></a-entity>
+            </a-entity>
+            <a-entity id="link6" layout="type: line; margin: 1.5" position="-4 -18 0">
+              <a-entity template="src: #link-decrease" data-src="#solar-system" data-thumb="#decrease-thumb"></a-entity>
+            </a-entity>
+          
+            <!-- Camera + cursor. -->
+          <a-entity id="rig" position="0 5 30">
+            <a-camera position="0 0 0">
+              <a-cursor id="cursor" color="green" fuse="true"></a-cursor>
+            </a-camera>
+          </a-entity>
+          <a-entity hand-controls="left"></a-entity>
+          <a-entity hand-controls="right"></a-entity>
+          
+        </a-scene>
+
+        <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+        <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+        <script src="https://button.glitch.me/button.js"></script>
+    </body>
+
+</html>
